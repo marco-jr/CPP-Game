@@ -5,8 +5,9 @@
 
 int main()
 {
-    BattleField* battleField = new(BattleField);
-    battleField->Setup();
+    BattleField* _BattleField = new BattleField();
+    // Setup is already called at the battlefield class constructor
+    //battleField->Setup();
 }
 
 

@@ -1,34 +1,54 @@
 #pragma once
-#include "Character.h"
 #include "Types.h"
 #include <list>
 #include <iostream>
-#include "Grid.h"
+#include <string>
+
+class Character;
+class Grid;
+
 using namespace std;
+
 class BattleField
 {
 public:
 
+// Constructor
 	BattleField();
 
-	Grid* grid;
+// Logic
+	Grid* BattleFieldGrid;
+
 	Types::GridBox* PlayerCurrentLocation;
 	Types::GridBox* EnemyCurrentLocation;
-	list<Character>* AllPlayers;
-	shared_ptr<Character> PlayerCharacter;
-	//Character* PlayerCharacter;
-	shared_ptr<Character>* EnemyCharacter;
-	int currentTurn;
-	int numberOfPossibleTiles;
 
+	list<Character*> AllPlayers;
 
+	Character* PlayerCharacter;
+	Character* EnemyCharacter;
+
+	int CurrentTurn;
+	bool BattleOver;
+
+// Functions
+	int GetRandomInt(int min, int max);
+
+// Methods
 	void Setup();
+
+	void GetBattlefieldChoice();
 
 	void GetPlayerChoice();
 
-	void CreatePlayerCharacter(int classIndex);
+	void CreatePlayerCharacter(Types::CharacterClass characterClass, string characterName);
 
 	void CreateEnemyCharacter();
+
+	void AlocatePlayers();
+
+	void AlocatePlayerCharacter();
+
+	void AlocateEnemyCharacter();
 
 	void StartGame();
 
@@ -36,13 +56,13 @@ public:
 
 	void HandleTurn();
 
-	int GetRandomInt(int min, int max);
+	void PlayerCharacterWins();
 
-	void AlocatePlayers();
+	void EnemyCharacterWins();
 
-	void AlocatePlayerCharacter();
+	void ChoiceRestartGame();
 
-	void AlocateEnemyCharacter();
+	void RestartGame();
 };
 
 

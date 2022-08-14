@@ -1,22 +1,22 @@
 #pragma once
+#include <string>
+
+class Character;
+
+using namespace std;
+
 class Types
 {
 public:
-
+    
+    // GridBox struct corrections.
+    // Removed the "broken" constructor;
     struct GridBox
     {
         int xIndex;
         int yIndex;
-        bool ocupied;
         int Index;
-
-        GridBox(int x, int y, bool ocupied, int index)
-        {
-            xIndex = x;
-            yIndex = y;
-            ocupied = ocupied;
-            Index = index;
-        }
+        Character* CharacterReference;
     };
 
     enum CharacterClass
@@ -26,6 +26,5 @@ public:
         Cleric = 3,
         Archer = 4
     };
-
 };
 

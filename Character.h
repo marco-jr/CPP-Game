@@ -1,44 +1,60 @@
 #pragma once
-#include "Grid.h"
-#include "Character.h"
 #include "Types.h"
+#include <string>
+
+class BattleField;
+class Grid;
+
+using namespace std;
 
 class Character
 {
 public:
-
-    Character(Types::CharacterClass charcaterClass);
+// Constructor
+    Character(Types::CharacterClass characterClass, string characterName, int playerIndex, char icon);
     ~Character();
 
-    
+// Settings
+    Types::CharacterClass CharacterClass;
+    string CharacterName;
     float Health;
     float BaseDamage;
     float DamageMultiplier;
-    //public GridBox currentBox;
     int PlayerIndex;
-    //public Character Target{ get; set; }
 
+// Logic
+    int SpecialUses;
     Character* target;
-
+    bool bSuperDefense;
+    bool bSuperDamage;
     bool IsDead;
     char Icon;
+    Types::GridBox* CurrentBox;
 
-    Types::GridBox currentBox;
+// Functions
+    string GetClassEnumAsString(Types::CharacterClass characterClass);
 
-    bool TakeDamage(float amount);
-
-    int getIndex(vector<Types::GridBox*> v, int index);
+// Methods
+    void TakeDamage(Character* attacker, float amount);
 
     void Die();
 
-    void WalkTo(bool CanWalk);
+    void WalkTo(BattleField* battlefieldReference, int direction);
 
-    void StartTurn(Grid* battlefield);
+    void StartTurn(BattleField* battlefield);
 
-    bool CheckCloseTargets(Grid* battlefield);
+    bool CheckCloseTargets(BattleField* battlefield);
 
     void Attack(Character* target);
 
+    void ClearCurrentGrid();
 
+    void SuperDefense();
+
+    void CancelSuperDefense();
+
+    void SuperDamage();
+
+    void CancelSuperDamage();
 };
 
